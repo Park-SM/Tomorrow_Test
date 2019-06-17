@@ -1,6 +1,7 @@
 package view;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -54,6 +55,7 @@ public class MemberViewController implements Initializable {
 	// 목록 : 이중연결리스트는 아니지만 리스트의 특징과 배열 특징을 잘 혼용해 놓은 클래스 ArrayList 
 	ArrayList<Member> memberList;
 	MemberService memberService;
+	SimpleDateFormat dFormat = new SimpleDateFormat("yyyy");
 	
 	public MemberViewController() {
 		
@@ -125,12 +127,12 @@ public class MemberViewController implements Initializable {
 		tableViewMember.setItems(data);
 	}
 	
-	
 	@FXML 
 	private void handleCreate() { // event source, listener, handler
 		if(tfEmail.getText().length() > 0) {
 			Member newMember = 
-					new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText(), "남자");
+					new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), String.valueOf(Integer.parseInt(dFormat.format(System.currentTimeMillis()))
+							- Integer.parseInt(tfBirth.getText().substring(0,  4)) + 1), tfAddress.getText(), tfContact.getText(), "남자");
 			if( memberService.findByUid(newMember) < 0) {
 				data.add(newMember);			
 				tableViewMember.setItems(data);
@@ -143,9 +145,11 @@ public class MemberViewController implements Initializable {
 		} else
 			showAlert("ID 입력오류");
 	}
-	@FXML 
+	
+	@FXML
 	private void handleUpdate() {
-		Member newMember = new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText(), "남자");
+		Member newMember = new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), String.valueOf(Integer.parseInt(dFormat.format(System.currentTimeMillis()))
+				- Integer.parseInt(tfBirth.getText().substring(0,  4)) + 1), tfAddress.getText(), tfContact.getText(), "남자");
 
 		int selectedIndex = tableViewMember.getSelectionModel().getSelectedIndex();
 		// uid를 변경하고 수정 -> 생성으로 처리하게 된다.
