@@ -99,10 +99,10 @@ public class Member { // DB의 레코드와 매핑되는 객체
     }
     
     // contact
-	public String getContact() {
+	public String getUcontact() {
 		return this.uContact.get();
 	}
-	public void setContact(String contact) {
+	public void setUcontact(String contact) {
 		this.uContact.set(contact);
 	}
 	public StringProperty ucontactProperty() {

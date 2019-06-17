@@ -76,7 +76,7 @@ public class MemberViewController implements Initializable {
 
 		btnCreate.setOnMouseClicked(event -> handleCreate());		
 		btnUpdate.setOnMouseClicked(event -> handleUpdate());
-		btnDelete.setOnMouseClicked(e -> handleDelete());		
+		btnDelete.setOnMouseClicked(event -> handleDelete());	
 		
 		btnSearchAddress.setOnMouseClicked(event -> handleSearchAddress());
 		btnSearchName.setOnMouseClicked(event -> handleSearchName());	
@@ -101,9 +101,9 @@ public class MemberViewController implements Initializable {
 			tfEmail.setText(member.getUemail());
 			tfPw.setText(member.getUpw());
 			tfName.setText(member.getUname());
-			tfBirth.setText(member.getUname());
-			tfAddress.setText(member.getUname());
-			tfContact.setText(member.getUname());
+			tfBirth.setText(member.getUbirth());
+			tfAddress.setText(member.getUaddress());
+			tfContact.setText(member.getUcontact());
 		}
 		 else {
 			tfEmail.setText("");
@@ -178,7 +178,18 @@ public class MemberViewController implements Initializable {
 	}
 
 	private void handleSearchAddress() {
-		System.out.println("Click SearchAddress");
+		if (tfSearch.getText().equals("")) showAlert("검색조건을 입력해주세요.");
+		else {
+			String str = "";
+			ArrayList<Member> TempList = memberService.SearchAddress(tfSearch.getText());
+			if (TempList.size() > 0) {
+				int rNum = 1;
+				for(Member tMember : TempList) {
+					str += rNum++ + "> " + tMember.getUemail() + " | " + tMember.getUname() + " | " + tMember.getUage() + " | " + tMember.getUaddress() + " | " + tMember.getUcontact() + "\n";
+				}
+			} else str += "검색 결과가 없습니다.";
+			taResult.setText(str);
+		}
 	}
 	
 	private void handleSearchName() {

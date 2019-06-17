@@ -122,4 +122,17 @@ public class MemberDAO {
 		for(Member m : memberList)
 			System.out.println(m.getUname() + ":" + m.getUemail());
 	}
+	
+	public ArrayList<Member> SearchAddress(String address) {
+		ArrayList<Member> tempList = new ArrayList<Member>();
+		for (Member tMember : memberList) {
+			if (tMember.getUaddress().equals(address)) tempList.add(tMember);
+		}
+		return tempList;
+	}
+	
+	public ArrayList<Member> SearchName(String name) {
+		ArrayList<Member> tempList = null;
+		return tempList;
+	}
 }

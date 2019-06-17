@@ -10,4 +10,7 @@ public interface MemberService {
 	int update(Member member);
 	int delete(Member member);	
 	int findByUid(Member member);	
+	
+	ArrayList<Member> SearchAddress(String address);
+	ArrayList<Member> SearchName(String name);
 }

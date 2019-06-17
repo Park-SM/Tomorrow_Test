@@ -61,5 +61,15 @@ public class MemberServiceImpl implements MemberService {
 	public int findByUid(Member member) {
 		return memberDAO.searchByID(member);
 	}
+	
+	@Override
+	public ArrayList<Member> SearchAddress(String address) {
+		return memberDAO.SearchAddress(address);
+	}
+	
+	@Override
+	public ArrayList<Member> SearchName(String name) {
+		return memberDAO.SearchName(name);
+	}
 
 }
