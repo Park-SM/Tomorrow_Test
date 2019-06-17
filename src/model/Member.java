@@ -14,15 +14,16 @@ public class Member { // DB의 레코드와 매핑되는 객체
 	private StringProperty uAge;
 	private StringProperty uAddress;
 	private StringProperty uContact;
+	private StringProperty uSex;
 	/*
     private final IntegerProperty zipcode;
     private ObjectProperty<LocalDate> birthday;
 	*/
 	public Member() {
-		this(null, null, null, null, null, null, null);
+		this(null, null, null, null, null, null, null, null);
 	}
 	
-	public Member(String email, String pw, String name, String birth, String age, String address, String contact) {
+	public Member(String email, String pw, String name, String birth, String age, String address, String contact, String sex) {
 		this.uEmail = new SimpleStringProperty(email);
 		this.uPw = new SimpleStringProperty(pw);
 		this.uName = new SimpleStringProperty(name);
@@ -30,6 +31,7 @@ public class Member { // DB의 레코드와 매핑되는 객체
 		this.uAge = new SimpleStringProperty(age);
 		this.uAddress = new SimpleStringProperty(address);
 		this.uContact = new SimpleStringProperty(contact);
+		this.uSex = new SimpleStringProperty(sex);
 	}
 	
 	// email
@@ -108,5 +110,16 @@ public class Member { // DB의 레코드와 매핑되는 객체
 	public StringProperty ucontactProperty() {
         return uContact;
     }
+	
+	// sex
+	public String getUsex() {
+		return this.uSex.get();
+	}
+	public void setUsex(String sex) {
+		this.uSex.set(sex);
+	}
+	public StringProperty usexProperty() {
+	    return uSex;
+	}
 
 }

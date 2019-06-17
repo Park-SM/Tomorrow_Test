@@ -1,5 +1,5 @@
-egyou@induk.ac.kr 	cometrue	유응구	19900301	20	서울남부	029507625
-comso1@induk.ac.kr	cometrue	컴소0122323	19910301	20	서울북부	029507631
-comso2@induk.ac.kr	cometrusdfsdf	컴소02	19900701	20	강원도당	029507632
-comso3@induk.ac.kr	cometrue	컴소100	19930301	20	경기북부	029507633
-comso4@induk.ac.kr	cometrue	컴소04	19940701	20	경기북부	029507634
+egyou@induk.ac.kr 	cometrue	유응구	19900301	20	서울남부	029507625	남자
+comso1@induk.ac.kr	cometrue	컴소0122323	19910301	20	서울북부	029507631	여자
+comso2@induk.ac.kr	cometrusdfsdf	컴소02	19900701	20	강원도당	029507632	남자
+comso3@induk.ac.kr	cometrue	컴소100	19930301	20	경기북부	029507633	남자
+comso4@induk.ac.kr	cometrue	컴소04	19940701	20	경기북부	029507634	남자

@@ -46,6 +46,7 @@ public class MemberViewController implements Initializable {
 	@FXML	private TableColumn<Member, String> columnAge;
 	@FXML	private TableColumn<Member, String> columnAddress;
 	@FXML	private TableColumn<Member, String> columnContact;
+	@FXML	private TableColumn<Member, String> columnSex;
 	
 	// Member : model이라고도 하고 DTO, VO 라고도 함
 	// 시스템 밖에 저장된 정보를 객체들간에 사용하는 정보로 변환한 자료구조 또는 객체
@@ -70,6 +71,7 @@ public class MemberViewController implements Initializable {
 		columnAge.setCellValueFactory(cvf -> cvf.getValue().uageProperty());
 		columnAddress.setCellValueFactory(cvf -> cvf.getValue().uaddressProperty());
 		columnContact.setCellValueFactory(cvf -> cvf.getValue().ucontactProperty());
+		columnSex.setCellValueFactory(cvf -> cvf.getValue().usexProperty());
 		
 		tableViewMember.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showMemberInfo(newValue));
@@ -83,7 +85,7 @@ public class MemberViewController implements Initializable {
 		
 		loadMemberTableView();
 	}
-	String str = ""; // 인스턴스 변수 - 객체 변수, 객체가 존재하는 동안 메모리에 존재
+	//String str = ""; // 인스턴스 변수 - 객체 변수, 객체가 존재하는 동안 메모리에 존재
 	@FXML 
 	private void handleExecute() { // event source, listener, handler
 		//str = str + tfExecute.getText() + "\n";
@@ -128,7 +130,7 @@ public class MemberViewController implements Initializable {
 	private void handleCreate() { // event source, listener, handler
 		if(tfEmail.getText().length() > 0) {
 			Member newMember = 
-					new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText());
+					new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText(), "남자");
 			if( memberService.findByUid(newMember) < 0) {
 				data.add(newMember);			
 				tableViewMember.setItems(data);
@@ -143,13 +145,13 @@ public class MemberViewController implements Initializable {
 	}
 	@FXML 
 	private void handleUpdate() {
-		Member newMember = new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText());
+		Member newMember = new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText(), "남자");
 
 		int selectedIndex = tableViewMember.getSelectionModel().getSelectedIndex();
 		// uid를 변경하고 수정 -> 생성으로 처리하게 된다.
 		// uid로 조회하는데 uid가 수정이되면 실제로 수정이 불가능함, findByUid() 가 -1 반환
 		if (selectedIndex != memberService.findByUid(newMember)) {
-			showAlert("아이디를 수정하면 업데이트 할 수 없습니다.");    
+			showAlert("아이디를 수정하면 업데이트 할 수 없습니다.");
 		}
 		else if (selectedIndex >= 0) {
 			tableViewMember.getItems().set(selectedIndex, newMember);

@@ -60,7 +60,8 @@
             <TableColumn fx:id="columnBirth" maxWidth="92.0" prefWidth="88.0" text="생년월일" />
             <TableColumn fx:id="columnAge" prefWidth="41.0" text="나이" />
             <TableColumn fx:id="columnAddress" prefWidth="72.0" text="주소" />
-            <TableColumn fx:id="columnContact" prefWidth="100.0" text="연락처" />
+            <TableColumn fx:id="columnContact" prefWidth="55.0" text="연락처" />
+            <TableColumn fx:id="columnSex" maxWidth="58.0" prefWidth="58.0" text="성별" />
         </columns>
       </TableView>
       <Button fx:id="btnSearchAddress" layoutX="18.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#handleExecute" prefHeight="30.0" prefWidth="60.0" text="주소" />
