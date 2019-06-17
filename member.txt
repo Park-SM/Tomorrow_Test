@@ -3,3 +3,4 @@ comso1@induk.ac.kr	cometrue	컴소0122323	19910301	29	서울북부	029507631	남
 comso2@induk.ac.kr	cometrusdfsdf	컴소02	19900701	30	강원도당	029507632	남자
 comso3@induk.ac.kr	cometrue	컴소100	19930301	27	경기북부	029507633	남자
 comso4@induk.ac.kr	cometrue	컴소04	19970701	23	경기북부	029507634	남자
+t	cometrue	asdasd	19930301	27	경기북부	029507633	남자

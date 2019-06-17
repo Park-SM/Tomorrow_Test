@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	// this : 현재 객체 지정, this(매개변수) : 현재 객체의 생성자
 	public MemberServiceImpl() {
-		this(new File("member.txt"));		
+		this(new File("member.txt"));
 	}
 	
 	public MemberServiceImpl(File file) {
@@ -60,6 +60,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int findByUid(Member member) {
 		return memberDAO.searchByID(member);
+	}
+	
+	@Override
+	public int findByUname(Member member) {
+		return memberDAO.searchByName(member);
 	}
 	
 	@Override

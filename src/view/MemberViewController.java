@@ -78,15 +78,16 @@ public class MemberViewController implements Initializable {
 		tableViewMember.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showMemberInfo(newValue));
 
-		btnCreate.setOnMouseClicked(event -> handleCreate());		
+		btnCreate.setOnMouseClicked(event -> handleCreate());
 		btnUpdate.setOnMouseClicked(event -> handleUpdate());
-		btnDelete.setOnMouseClicked(event -> handleDelete());	
+		btnDelete.setOnMouseClicked(event -> handleDelete());
 		
 		btnSearchAddress.setOnMouseClicked(event -> handleSearchAddress());
 		btnSearchName.setOnMouseClicked(event -> handleSearchName());	
 		
 		loadMemberTableView();
 	}
+	
 	//String str = ""; // 인스턴스 변수 - 객체 변수, 객체가 존재하는 동안 메모리에 존재
 	@FXML 
 	private void handleExecute() { // event source, listener, handler
@@ -132,18 +133,19 @@ public class MemberViewController implements Initializable {
 		if(tfEmail.getText().length() > 0) {
 			Member newMember = 
 					new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), String.valueOf(Integer.parseInt(dFormat.format(System.currentTimeMillis()))
-							- Integer.parseInt(tfBirth.getText().substring(0,  4)) + 1), tfAddress.getText(), tfContact.getText(), "남자");
-			if( memberService.findByUid(newMember) < 0) {
-				data.add(newMember);			
-				tableViewMember.setItems(data);
-				memberService.create(newMember);
-			}
-			else {
-				showAlert("아이디 중복으로 등록할 수 없습니다.");
-			}
+							- Integer.parseInt(tfBirth.getText().substring(0, 4)) + 1), tfAddress.getText(), tfContact.getText(), "남자");
 			
-		} else
-			showAlert("ID 입력오류");
+			if(memberService.findByUid(newMember) < 0 || memberService.findByUname(newMember) < 0) {
+				if(memberService.findByUid(newMember) < 0) {
+					if (memberService.findByUname(newMember) < 0) {
+						data.add(newMember);			
+						tableViewMember.setItems(data);
+						memberService.create(newMember);
+					} else showAlert("이름을 중복으로 등록할 수 없습니다.");
+				} else showAlert("이메일을 중복으로 등록할 수 없습니다.");
+			} else showAlert("이메일과 이름을 중복으로 등록할 수 없습니다.");
+				
+		} else showAlert("Email 입력오류");
 	}
 	
 	@FXML
@@ -159,7 +161,7 @@ public class MemberViewController implements Initializable {
 		}
 		else if (selectedIndex >= 0) {
 			tableViewMember.getItems().set(selectedIndex, newMember);
-			memberService.update(newMember);			
+			memberService.update(newMember);
 		} else {
 			showAlert("업데이트할 수 없습니다.");          
         }
@@ -182,7 +184,7 @@ public class MemberViewController implements Initializable {
         alert.setContentText("확인 : " + message);            
         alert.showAndWait();
 	}
-
+	
 	private void handleSearchAddress() {
 		if (tfSearch.getText().equals("")) showAlert("검색조건을 입력해주세요.");
 		else {

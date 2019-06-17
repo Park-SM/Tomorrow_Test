@@ -16,8 +16,8 @@ public class Member { // DB의 레코드와 매핑되는 객체
 	private StringProperty uContact;
 	private StringProperty uSex;
 	/*
-    private final IntegerProperty zipcode;
-    private ObjectProperty<LocalDate> birthday;
+    	private final IntegerProperty zipcode;
+    	private ObjectProperty<LocalDate> birthday;
 	*/
 	public Member() {
 		this(null, null, null, null, null, null, null, null);
