@@ -193,7 +193,18 @@ public class MemberViewController implements Initializable {
 	}
 	
 	private void handleSearchName() {
-		System.out.println("Click SearchName");
+		if (tfSearch.getText().equals("")) showAlert("검색조건을 입력해주세요.");
+		else {
+			String str = "";
+			ArrayList<Member> TempList = memberService.SearchName(tfSearch.getText());
+			if (TempList.size() > 0) {
+				int rNum = 1;
+				for(Member tMember : TempList) {
+					str += rNum++ + "> " + tMember.getUemail() + " | " + tMember.getUname() + " | " + tMember.getUage() + " | " + tMember.getUaddress() + " | " + tMember.getUcontact() + "\n";
+				}
+			} else str += "검색 결과가 없습니다.";
+			taResult.setText(str);
+		}
 	}
 	
 	private Main mainApp;

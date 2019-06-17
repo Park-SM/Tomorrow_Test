@@ -132,7 +132,10 @@ public class MemberDAO {
 	}
 	
 	public ArrayList<Member> SearchName(String name) {
-		ArrayList<Member> tempList = null;
+		ArrayList<Member> tempList = new ArrayList<Member>();
+		for (Member tMember : memberList) {
+			if (tMember.getUname().equals(name)) tempList.add(tMember);
+		}
 		return tempList;
 	}
 }
