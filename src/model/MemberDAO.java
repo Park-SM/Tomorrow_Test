@@ -54,7 +54,7 @@ public class MemberDAO {
 		}
 		*/
 		for(Member m : memberList) { // 개선된 for 문
-			if(m.getUid().equals(member.getUid())) {
+			if(m.getUemail().equals(member.getUemail())) {
 				ret = index;
 				break;
 			}
@@ -120,6 +120,6 @@ public class MemberDAO {
 	}
 	public void printMemberList() {
 		for(Member m : memberList)
-			System.out.println(m.getUname() + ":" + m.getUid());
+			System.out.println(m.getUname() + ":" + m.getUemail());
 	}
 }

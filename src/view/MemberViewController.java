@@ -26,19 +26,25 @@ public class MemberViewController implements Initializable {
 	@FXML	private Button btnUpdate;
 	@FXML	private Button btnDelete;
 	
-	@FXML	private Button btnExecute;
-	@FXML	private TextArea taExecute;
-	@FXML	private TextField tfExecute;
+	@FXML	private Button btnSearchAddress;
+	@FXML	private Button btnSearchName;
+	@FXML	private TextArea taResult;
+	@FXML	private TextField tfSearch;
 	
-	@FXML	private TextField tfID;
-	@FXML	private PasswordField tfPW;
+	@FXML	private TextField tfEmail;
+	@FXML	private PasswordField tfPw;
 	@FXML	private TextField tfName;
+	@FXML	private TextField tfBirth;
+	@FXML	private TextField tfAddress;
 	@FXML	private TextField tfContact;
 	
 	@FXML 	private TableView<Member> tableViewMember;
+	@FXML	private TableColumn<Member, String> columnEmail;
+	@FXML	private TableColumn<Member, String> columnPw;
 	@FXML	private TableColumn<Member, String> columnName;
-	@FXML	private TableColumn<Member, String> columnID;
-	@FXML	private TableColumn<Member, String> columnPW;
+	@FXML	private TableColumn<Member, String> columnBirth;
+	@FXML	private TableColumn<Member, String> columnAge;
+	@FXML	private TableColumn<Member, String> columnAddress;
 	@FXML	private TableColumn<Member, String> columnContact;
 	
 	// Member : model이라고도 하고 DTO, VO 라고도 함
@@ -57,45 +63,55 @@ public class MemberViewController implements Initializable {
 		
 		memberService = new MemberServiceImpl();
 		// 람다식 : java 8  함수형 언어 지원 
-		columnID.setCellValueFactory(cvf -> cvf.getValue().uidProperty());
-		columnPW.setCellValueFactory(cvf -> cvf.getValue().upwProperty());
-		columnName.setCellValueFactory(cvf -> cvf.getValue().unameProperty());	
-		columnContact.setCellValueFactory(cvf -> cvf.getValue().contactProperty());
+		columnEmail.setCellValueFactory(cvf -> cvf.getValue().uemailProperty());
+		columnPw.setCellValueFactory(cvf -> cvf.getValue().upwProperty());
+		columnName.setCellValueFactory(cvf -> cvf.getValue().unameProperty());
+		columnBirth.setCellValueFactory(cvf -> cvf.getValue().ubirthProperty());
+		columnAge.setCellValueFactory(cvf -> cvf.getValue().uageProperty());
+		columnAddress.setCellValueFactory(cvf -> cvf.getValue().uaddressProperty());
+		columnContact.setCellValueFactory(cvf -> cvf.getValue().ucontactProperty());
 		
 		tableViewMember.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showMemberInfo(newValue));
 
-		//btnCreate.setOnMouseClicked(event -> handleCreate());		
-		// btnDelete.setOnMouseClicked(e -> handleDelete());		
-		btnExecute.setOnMouseClicked(event -> handleExecute());	
+		btnCreate.setOnMouseClicked(event -> handleCreate());		
+		btnUpdate.setOnMouseClicked(event -> handleUpdate());
+		btnDelete.setOnMouseClicked(e -> handleDelete());		
+		
+		btnSearchAddress.setOnMouseClicked(event -> handleSearchAddress());
+		btnSearchName.setOnMouseClicked(event -> handleSearchName());	
 		
 		loadMemberTableView();
 	}
 	String str = ""; // 인스턴스 변수 - 객체 변수, 객체가 존재하는 동안 메모리에 존재
 	@FXML 
 	private void handleExecute() { // event source, listener, handler
-		str = str + tfExecute.getText() + "\n";
+		//str = str + tfExecute.getText() + "\n";
 		//str = ts.setTextArea(tfExecute.getText());
 		/*
 		str = taExecute.getText();
 		String name = tfExecute.getText();
 		str = str + ts.appendTextArea(name);
 		*/
-		taExecute.setText(str);
+		//taExecute.setText(str);
 	}
 	
 	private void showMemberInfo(Member member) {
 		if (member != null) {
-			tfID.setText(member.getUid());
-			tfPW.setText(member.getUpw());
+			tfEmail.setText(member.getUemail());
+			tfPw.setText(member.getUpw());
 			tfName.setText(member.getUname());
-//			tfMobilePhone.setText(member.getMobilePhone());
+			tfBirth.setText(member.getUname());
+			tfAddress.setText(member.getUname());
+			tfContact.setText(member.getUname());
 		}
 		 else {
-			 tfID.setText("");
-			 tfPW.setText("");
-		     tfName.setText("");
-//		     tfMobilePhone.setText("010");
+			tfEmail.setText("");
+			tfPw.setText("");
+			tfName.setText("");
+			tfBirth.setText("");
+			tfAddress.setText("");
+			tfContact.setText("");
 		 }
 	}
 	
@@ -110,9 +126,9 @@ public class MemberViewController implements Initializable {
 	
 	@FXML 
 	private void handleCreate() { // event source, listener, handler
-		if(tfID.getText().length() > 0) {
+		if(tfEmail.getText().length() > 0) {
 			Member newMember = 
-					new Member(tfID.getText(), tfPW.getText(), tfName.getText(), tfContact.getText());
+					new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText());
 			if( memberService.findByUid(newMember) < 0) {
 				data.add(newMember);			
 				tableViewMember.setItems(data);
@@ -127,7 +143,7 @@ public class MemberViewController implements Initializable {
 	}
 	@FXML 
 	private void handleUpdate() {
-		Member newMember = new Member(tfID.getText(), tfPW.getText(), tfName.getText(), tfContact.getText());
+		Member newMember = new Member(tfEmail.getText(), tfPw.getText(), tfName.getText(), tfBirth.getText(), "20", tfAddress.getText(), tfContact.getText());
 
 		int selectedIndex = tableViewMember.getSelectionModel().getSelectedIndex();
 		// uid를 변경하고 수정 -> 생성으로 처리하게 된다.
@@ -161,6 +177,14 @@ public class MemberViewController implements Initializable {
         alert.showAndWait();
 	}
 
+	private void handleSearchAddress() {
+		System.out.println("Click SearchAddress");
+	}
+	
+	private void handleSearchName() {
+		System.out.println("Click SearchName");
+	}
+	
 	private Main mainApp;
 
     public void setMainApp(Main mainApp) {
