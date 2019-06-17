@@ -64,7 +64,7 @@ public class MemberViewController implements Initializable {
 		memberService = new MemberServiceImpl();
 		// 람다식 : java 8  함수형 언어 지원 
 		columnEmail.setCellValueFactory(cvf -> cvf.getValue().uemailProperty());
-		columnPw.setCellValueFactory(cvf -> cvf.getValue().upwProperty());
+		// columnPw.setCellValueFactory(cvf -> cvf.getValue().upwProperty());
 		columnName.setCellValueFactory(cvf -> cvf.getValue().unameProperty());
 		columnBirth.setCellValueFactory(cvf -> cvf.getValue().ubirthProperty());
 		columnAge.setCellValueFactory(cvf -> cvf.getValue().uageProperty());
